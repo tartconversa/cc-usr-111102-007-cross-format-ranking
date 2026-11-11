@@ -1,0 +1,17 @@
+[
+  {
+    "path": "fixtures/impressions.jsonl",
+    "sha256": "65e16ba15a6db358741ea75e3ff4262f7c9f18bbc02affcaab1d077f45702485",
+    "size_bytes": 6871
+  },
+  {
+    "path": "fixtures/items.jsonl",
+    "sha256": "6d1cd4bb07f488b556687f5b61fab24773c9f61039cfed9838c3c9a0ee260188",
+    "size_bytes": 988
+  },
+  {
+    "path": "fixtures/policies.json",
+    "sha256": "b6a908afac8579b7fd05bb45b0e7fd58f0c06e220ff9b8f504047b9d4bd53db2",
+    "size_bytes": 379
+  }
+]

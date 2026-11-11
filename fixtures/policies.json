@@ -1,0 +1,17 @@
+{
+  "hand_calculation_requests": [
+    "hand-1",
+    "hand-2"
+  ],
+  "target_selected_action_probabilities": {
+    "hand-1": 0.25,
+    "hand-2": 1.0
+  },
+  "train_end": "2026-10-12T00:00:00+08:00",
+  "validation_end": "2026-10-17T00:00:00+08:00",
+  "test_end": "2026-10-24T00:00:00+08:00",
+  "list_size": 3,
+  "max_per_category": 2,
+  "bootstrap_repeats": 200,
+  "seed": 10207
+}

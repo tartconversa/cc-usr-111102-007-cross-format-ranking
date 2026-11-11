@@ -1,0 +1,7 @@
+{"item_key": "a", "category": "dining", "effective_at": "2026-09-01T00:00:00+08:00", "known_at": "2026-09-01T00:00:00+08:00", "open": true}
+{"item_key": "b", "category": "dining", "effective_at": "2026-09-01T00:00:00+08:00", "known_at": "2026-09-01T00:00:00+08:00", "open": true}
+{"item_key": "c", "category": "dining", "effective_at": "2026-09-01T00:00:00+08:00", "known_at": "2026-09-01T00:00:00+08:00", "open": true}
+{"item_key": "d", "category": "family", "effective_at": "2026-09-01T00:00:00+08:00", "known_at": "2026-09-01T00:00:00+08:00", "open": true}
+{"item_key": "e", "category": "entertainment", "effective_at": "2026-09-01T00:00:00+08:00", "known_at": "2026-09-01T00:00:00+08:00", "open": true}
+{"item_key": "f", "category": "family", "effective_at": "2026-09-01T00:00:00+08:00", "known_at": "2026-09-01T00:00:00+08:00", "open": true}
+{"item_key": "f", "category": "family", "effective_at": "2026-10-20T00:00:00+08:00", "known_at": "2026-10-19T00:00:00+08:00", "open": false}

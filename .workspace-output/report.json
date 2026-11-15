@@ -1,0 +1,3182 @@
+{
+  "inputs": {
+    "fixture_dir": "fixtures",
+    "raw_rows": 32,
+    "unique_requests": 32,
+    "removed_duplicate_rows": 0
+  },
+  "splits": {
+    "train": {
+      "rows": 20,
+      "requests": [
+        "hand-1",
+        "hand-2",
+        "r00",
+        "r20",
+        "r01",
+        "r21",
+        "r02",
+        "r22",
+        "r03",
+        "r23",
+        "r24",
+        "r04",
+        "r25",
+        "r05",
+        "r26",
+        "r06",
+        "r27",
+        "r07",
+        "r08",
+        "r28"
+      ]
+    },
+    "validation": {
+      "rows": 6,
+      "requests": [
+        "r09",
+        "r29",
+        "r10",
+        "r11",
+        "r12",
+        "r13"
+      ]
+    },
+    "test": {
+      "rows": 6,
+      "requests": [
+        "r14",
+        "r15",
+        "r16",
+        "r17",
+        "r18",
+        "r19"
+      ]
+    }
+  },
+  "logging_policy_check": {
+    "verified_uniform_over_candidates": true,
+    "deviation_count": 0,
+    "deviations": [],
+    "statement": "所有记录的 propensity 等于 1/|候选集|，与候选集均匀随机一致；在此核验下，候选集内每个动作的 μ 均为 1/|候选集|。"
+  },
+  "hand_check": {
+    "reward": "reward_click",
+    "unclipped": {
+      "requests": 2,
+      "ips": 0.25,
+      "snips": 0.3333333333333333,
+      "ess": 1.8,
+      "ess_ratio": 0.9,
+      "coverage": 1.0,
+      "zero_propensity_rows": 0,
+      "infinite_weight_rows": 0,
+      "max_weight": 1.0,
+      "weight_sum": 1.5,
+      "bootstrap": {
+        "repeats": 200,
+        "resampled_requests": 2,
+        "ips": {
+          "low": 0.0,
+          "high": 0.5
+        },
+        "snips": {
+          "low": 0.0,
+          "high": 1.0
+        }
+      },
+      "bias": "在支持核验通过时无偏（针对给定记录策略与目标策略）；支持不足时只读作已识别下界",
+      "full_policy_value_identifiable": true
+    },
+    "support": {
+      "logging_policy_uniform_verified": true,
+      "status": "verified_full_support",
+      "proven_zero_support_requests": [],
+      "proven_zero_support_request_count": 0,
+      "proven_zero_support_mass_total": 0,
+      "unverified_support_requests": [],
+      "unverified_support_request_count": 0,
+      "full_policy_value_identifiable": true,
+      "value_reporting": "full",
+      "statement": "目标支持集内每个动作的记录概率均已核验为正，在此核验下 IPS 是完整目标价值的无偏估计（仍仅限离线、无模型错设之外的假设）。"
+    },
+    "hand_verifiable": {
+      "rows": [
+        {
+          "request_id": "hand-1",
+          "reward": 1.0,
+          "target_prob": 0.25,
+          "logging_prob": 0.5,
+          "weight": 0.5,
+          "contribution_to_ips": 0.25
+        },
+        {
+          "request_id": "hand-2",
+          "reward": 0.0,
+          "target_prob": 1.0,
+          "logging_prob": 1.0,
+          "weight": 1.0,
+          "contribution_to_ips": 0.0
+        }
+      ],
+      "ips": 0.25,
+      "snips": 0.3333333333333333,
+      "weight_sum": 1.5,
+      "ess": 1.8
+    },
+    "assertions": {
+      "ips_expected": 0.25,
+      "ips_actual": 0.25,
+      "ips_ok": true,
+      "snips_expected": 0.3333333333333333,
+      "snips_actual": 0.3333333333333333,
+      "snips_ok": true,
+      "ess_expected": 1.8,
+      "ess_actual": 1.8,
+      "ess_ok": true,
+      "derivation": "权重 = 目标概率/记录概率：0.25/0.5=0.5 与 1/1=1。IPS=(0.5*1+1*0)/2=0.25；SNIPS=(0.5*1+1*0)/(0.5+1)=1/3；ESS=(0.5+1)^2/(0.5^2+1^2)=1.8。"
+    },
+    "interpretation": "IPS/SNIPS 在 policies 给出的目标被记录动作概率下计算。其余候选动作的目标质量未逐项规定，但记录策略在候选集上均匀已核验，其 μ 为正；因此这可读作该候选集内目标的离线估计。"
+  },
+  "time_leakage_audit": {
+    "split_membership_overlaps": {},
+    "overlap_free": true,
+    "same_request_in_multiple_splits": false,
+    "time_ordering_ok": true,
+    "bounds": {
+      "train": [
+        "2026-10-01T10:00:00+08:00",
+        "2026-10-11T14:00:00+08:00"
+      ],
+      "validation": [
+        "2026-10-12T11:00:00+08:00",
+        "2026-10-16T15:00:00+08:00"
+      ],
+      "test": [
+        "2026-10-17T16:00:00+08:00",
+        "2026-10-22T13:00:00+08:00"
+      ]
+    },
+    "attribute_version_violations": [],
+    "future_version_counterfactual": [
+      {
+        "requested_at": "2026-10-19T12:00:00+08:00",
+        "as_of_version": {
+          "open": true,
+          "effective_at": "2026-09-01T00:00:00+08:00"
+        },
+        "latest_version_if_leaked": {
+          "open": false,
+          "effective_at": "2026-10-20T00:00:00+08:00"
+        },
+        "difference": "按最新版本会把 f 误判为闭店并排除；as-of 版本仍营业。"
+      }
+    ],
+    "pass": true,
+    "note": "检查覆盖每条请求的每个候选属性；切分以请求时间为唯一依据。"
+  },
+  "policy_scenarios": {
+    "uniform_random_target": {
+      "reward": "reward_click",
+      "unclipped": {
+        "requests": 32,
+        "ips": 0.65625,
+        "snips": 0.65625,
+        "ess": 32.0,
+        "ess_ratio": 1.0,
+        "coverage": 1.0,
+        "zero_propensity_rows": 0,
+        "infinite_weight_rows": 0,
+        "max_weight": 1.0,
+        "weight_sum": 32.0,
+        "bootstrap": {
+          "repeats": 200,
+          "resampled_requests": 32,
+          "ips": {
+            "low": 0.5,
+            "high": 0.8125
+          },
+          "snips": {
+            "low": 0.5,
+            "high": 0.8125
+          }
+        },
+        "bias": "在支持核验通过时无偏（针对给定记录策略与目标策略）；支持不足时只读作已识别下界",
+        "full_policy_value_identifiable": true
+      },
+      "support": {
+        "logging_policy_uniform_verified": true,
+        "status": "verified_full_support",
+        "proven_zero_support_requests": [],
+        "proven_zero_support_request_count": 0,
+        "proven_zero_support_mass_total": 0,
+        "unverified_support_requests": [],
+        "unverified_support_request_count": 0,
+        "full_policy_value_identifiable": true,
+        "value_reporting": "full",
+        "statement": "目标支持集内每个动作的记录概率均已核验为正，在此核验下 IPS 是完整目标价值的无偏估计（仍仅限离线、无模型错设之外的假设）。"
+      },
+      "hand_verifiable": {
+        "rows": [
+          {
+            "request_id": "hand-1",
+            "reward": 1.0,
+            "target_prob": 0.5,
+            "logging_prob": 0.5,
+            "weight": 1.0,
+            "contribution_to_ips": 0.03125
+          },
+          {
+            "request_id": "hand-2",
+            "reward": 0.0,
+            "target_prob": 1.0,
+            "logging_prob": 1.0,
+            "weight": 1.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r00",
+            "reward": 0.0,
+            "target_prob": 0.16666666666666666,
+            "logging_prob": 0.16666666666666666,
+            "weight": 1.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r20",
+            "reward": 1.0,
+            "target_prob": 0.16666666666666666,
+            "logging_prob": 0.16666666666666666,
+            "weight": 1.0,
+            "contribution_to_ips": 0.03125
+          },
+          {
+            "request_id": "r01",
+            "reward": 1.0,
+            "target_prob": 0.16666666666666666,
+            "logging_prob": 0.16666666666666666,
+            "weight": 1.0,
+            "contribution_to_ips": 0.03125
+          },
+          {
+            "request_id": "r21",
+            "reward": 0.0,
+            "target_prob": 0.16666666666666666,
+            "logging_prob": 0.16666666666666666,
+            "weight": 1.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r02",
+            "reward": 1.0,
+            "target_prob": 0.16666666666666666,
+            "logging_prob": 0.16666666666666666,
+            "weight": 1.0,
+            "contribution_to_ips": 0.03125
+          },
+          {
+            "request_id": "r22",
+            "reward": 1.0,
+            "target_prob": 0.16666666666666666,
+            "logging_prob": 0.16666666666666666,
+            "weight": 1.0,
+            "contribution_to_ips": 0.03125
+          },
+          {
+            "request_id": "r03",
+            "reward": 0.0,
+            "target_prob": 0.16666666666666666,
+            "logging_prob": 0.16666666666666666,
+            "weight": 1.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r23",
+            "reward": 1.0,
+            "target_prob": 0.16666666666666666,
+            "logging_prob": 0.16666666666666666,
+            "weight": 1.0,
+            "contribution_to_ips": 0.03125
+          },
+          {
+            "request_id": "r24",
+            "reward": 0.0,
+            "target_prob": 0.16666666666666666,
+            "logging_prob": 0.16666666666666666,
+            "weight": 1.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r04",
+            "reward": 1.0,
+            "target_prob": 0.16666666666666666,
+            "logging_prob": 0.16666666666666666,
+            "weight": 1.0,
+            "contribution_to_ips": 0.03125
+          },
+          {
+            "request_id": "r25",
+            "reward": 1.0,
+            "target_prob": 0.16666666666666666,
+            "logging_prob": 0.16666666666666666,
+            "weight": 1.0,
+            "contribution_to_ips": 0.03125
+          },
+          {
+            "request_id": "r05",
+            "reward": 1.0,
+            "target_prob": 0.16666666666666666,
+            "logging_prob": 0.16666666666666666,
+            "weight": 1.0,
+            "contribution_to_ips": 0.03125
+          },
+          {
+            "request_id": "r26",
+            "reward": 1.0,
+            "target_prob": 0.16666666666666666,
+            "logging_prob": 0.16666666666666666,
+            "weight": 1.0,
+            "contribution_to_ips": 0.03125
+          },
+          {
+            "request_id": "r06",
+            "reward": 0.0,
+            "target_prob": 0.16666666666666666,
+            "logging_prob": 0.16666666666666666,
+            "weight": 1.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r27",
+            "reward": 0.0,
+            "target_prob": 0.16666666666666666,
+            "logging_prob": 0.16666666666666666,
+            "weight": 1.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r07",
+            "reward": 1.0,
+            "target_prob": 0.16666666666666666,
+            "logging_prob": 0.16666666666666666,
+            "weight": 1.0,
+            "contribution_to_ips": 0.03125
+          },
+          {
+            "request_id": "r08",
+            "reward": 1.0,
+            "target_prob": 0.16666666666666666,
+            "logging_prob": 0.16666666666666666,
+            "weight": 1.0,
+            "contribution_to_ips": 0.03125
+          },
+          {
+            "request_id": "r28",
+            "reward": 1.0,
+            "target_prob": 0.16666666666666666,
+            "logging_prob": 0.16666666666666666,
+            "weight": 1.0,
+            "contribution_to_ips": 0.03125
+          },
+          {
+            "request_id": "r09",
+            "reward": 0.0,
+            "target_prob": 0.16666666666666666,
+            "logging_prob": 0.16666666666666666,
+            "weight": 1.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r29",
+            "reward": 1.0,
+            "target_prob": 0.16666666666666666,
+            "logging_prob": 0.16666666666666666,
+            "weight": 1.0,
+            "contribution_to_ips": 0.03125
+          },
+          {
+            "request_id": "r10",
+            "reward": 1.0,
+            "target_prob": 0.16666666666666666,
+            "logging_prob": 0.16666666666666666,
+            "weight": 1.0,
+            "contribution_to_ips": 0.03125
+          },
+          {
+            "request_id": "r11",
+            "reward": 1.0,
+            "target_prob": 0.16666666666666666,
+            "logging_prob": 0.16666666666666666,
+            "weight": 1.0,
+            "contribution_to_ips": 0.03125
+          },
+          {
+            "request_id": "r12",
+            "reward": 0.0,
+            "target_prob": 0.16666666666666666,
+            "logging_prob": 0.16666666666666666,
+            "weight": 1.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r13",
+            "reward": 1.0,
+            "target_prob": 0.16666666666666666,
+            "logging_prob": 0.16666666666666666,
+            "weight": 1.0,
+            "contribution_to_ips": 0.03125
+          },
+          {
+            "request_id": "r14",
+            "reward": 1.0,
+            "target_prob": 0.16666666666666666,
+            "logging_prob": 0.16666666666666666,
+            "weight": 1.0,
+            "contribution_to_ips": 0.03125
+          },
+          {
+            "request_id": "r15",
+            "reward": 0.0,
+            "target_prob": 0.16666666666666666,
+            "logging_prob": 0.16666666666666666,
+            "weight": 1.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r16",
+            "reward": 1.0,
+            "target_prob": 0.16666666666666666,
+            "logging_prob": 0.16666666666666666,
+            "weight": 1.0,
+            "contribution_to_ips": 0.03125
+          },
+          {
+            "request_id": "r17",
+            "reward": 1.0,
+            "target_prob": 0.16666666666666666,
+            "logging_prob": 0.16666666666666666,
+            "weight": 1.0,
+            "contribution_to_ips": 0.03125
+          },
+          {
+            "request_id": "r18",
+            "reward": 0.0,
+            "target_prob": 0.16666666666666666,
+            "logging_prob": 0.16666666666666666,
+            "weight": 1.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r19",
+            "reward": 1.0,
+            "target_prob": 0.16666666666666666,
+            "logging_prob": 0.16666666666666666,
+            "weight": 1.0,
+            "contribution_to_ips": 0.03125
+          }
+        ],
+        "ips": 0.65625,
+        "snips": 0.65625,
+        "weight_sum": 32.0,
+        "ess": 32.0
+      },
+      "clipped": {
+        "requests": 32,
+        "ips": 0.65625,
+        "snips": 0.65625,
+        "ess": 32.0,
+        "ess_ratio": 1.0,
+        "coverage": 1.0,
+        "zero_propensity_rows": 0,
+        "infinite_weight_rows": 0,
+        "max_weight": 1.0,
+        "weight_sum": 32.0,
+        "bootstrap": {
+          "repeats": 200,
+          "resampled_requests": 32,
+          "ips": {
+            "low": 0.5,
+            "high": 0.8125
+          },
+          "snips": {
+            "low": 0.5,
+            "high": 0.8125
+          }
+        },
+        "clip_threshold": 5.0,
+        "bias": "裁剪引入偏差（有偏估计量）；数值不能当成无偏策略收益，区间也只描述裁剪后估计量"
+      }
+    },
+    "unsupported_new_item_target": {
+      "reward": "reward_click",
+      "unclipped": {
+        "requests": 32,
+        "ips": 0.0,
+        "snips": null,
+        "ess": 0.0,
+        "ess_ratio": 0.0,
+        "coverage": 0.0,
+        "zero_propensity_rows": 0,
+        "infinite_weight_rows": 0,
+        "max_weight": 0.0,
+        "weight_sum": 0.0,
+        "bootstrap": {
+          "repeats": 200,
+          "resampled_requests": 32,
+          "ips": {
+            "low": 0.0,
+            "high": 0.0
+          },
+          "snips": {
+            "low": null,
+            "high": null
+          }
+        },
+        "bias": "在支持核验通过时无偏（针对给定记录策略与目标策略）；支持不足时只读作已识别下界",
+        "full_policy_value_identifiable": false
+      },
+      "support": {
+        "logging_policy_uniform_verified": true,
+        "status": "proven_zero_support",
+        "proven_zero_support_requests": [
+          {
+            "request_id": "hand-1",
+            "zero_support_mass": 1.0,
+            "zero_support_actions": [
+              "new-merchant-never-logged"
+            ],
+            "target_prob_on_logged_action": 0.0
+          },
+          {
+            "request_id": "hand-2",
+            "zero_support_mass": 1.0,
+            "zero_support_actions": [
+              "new-merchant-never-logged"
+            ],
+            "target_prob_on_logged_action": 0.0
+          },
+          {
+            "request_id": "r00",
+            "zero_support_mass": 1.0,
+            "zero_support_actions": [
+              "new-merchant-never-logged"
+            ],
+            "target_prob_on_logged_action": 0.0
+          },
+          {
+            "request_id": "r20",
+            "zero_support_mass": 1.0,
+            "zero_support_actions": [
+              "new-merchant-never-logged"
+            ],
+            "target_prob_on_logged_action": 0.0
+          },
+          {
+            "request_id": "r01",
+            "zero_support_mass": 1.0,
+            "zero_support_actions": [
+              "new-merchant-never-logged"
+            ],
+            "target_prob_on_logged_action": 0.0
+          },
+          {
+            "request_id": "r21",
+            "zero_support_mass": 1.0,
+            "zero_support_actions": [
+              "new-merchant-never-logged"
+            ],
+            "target_prob_on_logged_action": 0.0
+          },
+          {
+            "request_id": "r02",
+            "zero_support_mass": 1.0,
+            "zero_support_actions": [
+              "new-merchant-never-logged"
+            ],
+            "target_prob_on_logged_action": 0.0
+          },
+          {
+            "request_id": "r22",
+            "zero_support_mass": 1.0,
+            "zero_support_actions": [
+              "new-merchant-never-logged"
+            ],
+            "target_prob_on_logged_action": 0.0
+          },
+          {
+            "request_id": "r03",
+            "zero_support_mass": 1.0,
+            "zero_support_actions": [
+              "new-merchant-never-logged"
+            ],
+            "target_prob_on_logged_action": 0.0
+          },
+          {
+            "request_id": "r23",
+            "zero_support_mass": 1.0,
+            "zero_support_actions": [
+              "new-merchant-never-logged"
+            ],
+            "target_prob_on_logged_action": 0.0
+          },
+          {
+            "request_id": "r24",
+            "zero_support_mass": 1.0,
+            "zero_support_actions": [
+              "new-merchant-never-logged"
+            ],
+            "target_prob_on_logged_action": 0.0
+          },
+          {
+            "request_id": "r04",
+            "zero_support_mass": 1.0,
+            "zero_support_actions": [
+              "new-merchant-never-logged"
+            ],
+            "target_prob_on_logged_action": 0.0
+          },
+          {
+            "request_id": "r25",
+            "zero_support_mass": 1.0,
+            "zero_support_actions": [
+              "new-merchant-never-logged"
+            ],
+            "target_prob_on_logged_action": 0.0
+          },
+          {
+            "request_id": "r05",
+            "zero_support_mass": 1.0,
+            "zero_support_actions": [
+              "new-merchant-never-logged"
+            ],
+            "target_prob_on_logged_action": 0.0
+          },
+          {
+            "request_id": "r26",
+            "zero_support_mass": 1.0,
+            "zero_support_actions": [
+              "new-merchant-never-logged"
+            ],
+            "target_prob_on_logged_action": 0.0
+          },
+          {
+            "request_id": "r06",
+            "zero_support_mass": 1.0,
+            "zero_support_actions": [
+              "new-merchant-never-logged"
+            ],
+            "target_prob_on_logged_action": 0.0
+          },
+          {
+            "request_id": "r27",
+            "zero_support_mass": 1.0,
+            "zero_support_actions": [
+              "new-merchant-never-logged"
+            ],
+            "target_prob_on_logged_action": 0.0
+          },
+          {
+            "request_id": "r07",
+            "zero_support_mass": 1.0,
+            "zero_support_actions": [
+              "new-merchant-never-logged"
+            ],
+            "target_prob_on_logged_action": 0.0
+          },
+          {
+            "request_id": "r08",
+            "zero_support_mass": 1.0,
+            "zero_support_actions": [
+              "new-merchant-never-logged"
+            ],
+            "target_prob_on_logged_action": 0.0
+          },
+          {
+            "request_id": "r28",
+            "zero_support_mass": 1.0,
+            "zero_support_actions": [
+              "new-merchant-never-logged"
+            ],
+            "target_prob_on_logged_action": 0.0
+          },
+          {
+            "request_id": "r09",
+            "zero_support_mass": 1.0,
+            "zero_support_actions": [
+              "new-merchant-never-logged"
+            ],
+            "target_prob_on_logged_action": 0.0
+          },
+          {
+            "request_id": "r29",
+            "zero_support_mass": 1.0,
+            "zero_support_actions": [
+              "new-merchant-never-logged"
+            ],
+            "target_prob_on_logged_action": 0.0
+          },
+          {
+            "request_id": "r10",
+            "zero_support_mass": 1.0,
+            "zero_support_actions": [
+              "new-merchant-never-logged"
+            ],
+            "target_prob_on_logged_action": 0.0
+          },
+          {
+            "request_id": "r11",
+            "zero_support_mass": 1.0,
+            "zero_support_actions": [
+              "new-merchant-never-logged"
+            ],
+            "target_prob_on_logged_action": 0.0
+          },
+          {
+            "request_id": "r12",
+            "zero_support_mass": 1.0,
+            "zero_support_actions": [
+              "new-merchant-never-logged"
+            ],
+            "target_prob_on_logged_action": 0.0
+          },
+          {
+            "request_id": "r13",
+            "zero_support_mass": 1.0,
+            "zero_support_actions": [
+              "new-merchant-never-logged"
+            ],
+            "target_prob_on_logged_action": 0.0
+          },
+          {
+            "request_id": "r14",
+            "zero_support_mass": 1.0,
+            "zero_support_actions": [
+              "new-merchant-never-logged"
+            ],
+            "target_prob_on_logged_action": 0.0
+          },
+          {
+            "request_id": "r15",
+            "zero_support_mass": 1.0,
+            "zero_support_actions": [
+              "new-merchant-never-logged"
+            ],
+            "target_prob_on_logged_action": 0.0
+          },
+          {
+            "request_id": "r16",
+            "zero_support_mass": 1.0,
+            "zero_support_actions": [
+              "new-merchant-never-logged"
+            ],
+            "target_prob_on_logged_action": 0.0
+          },
+          {
+            "request_id": "r17",
+            "zero_support_mass": 1.0,
+            "zero_support_actions": [
+              "new-merchant-never-logged"
+            ],
+            "target_prob_on_logged_action": 0.0
+          },
+          {
+            "request_id": "r18",
+            "zero_support_mass": 1.0,
+            "zero_support_actions": [
+              "new-merchant-never-logged"
+            ],
+            "target_prob_on_logged_action": 0.0
+          },
+          {
+            "request_id": "r19",
+            "zero_support_mass": 1.0,
+            "zero_support_actions": [
+              "new-merchant-never-logged"
+            ],
+            "target_prob_on_logged_action": 0.0
+          }
+        ],
+        "proven_zero_support_request_count": 32,
+        "proven_zero_support_mass_total": 32.0,
+        "unverified_support_requests": [],
+        "unverified_support_request_count": 0,
+        "full_policy_value_identifiable": false,
+        "value_reporting": "deny_full_policy_value",
+        "statement": "目标在日志零支持动作上有正概率：这部分价值不可识别。表中 IPS/SNIPS 只是已识别部分，禁止当作完整策略收益。"
+      },
+      "hand_verifiable": {
+        "rows": [
+          {
+            "request_id": "hand-1",
+            "reward": 1.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.5,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "hand-2",
+            "reward": 0.0,
+            "target_prob": 0.0,
+            "logging_prob": 1.0,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r00",
+            "reward": 0.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r20",
+            "reward": 1.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r01",
+            "reward": 1.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r21",
+            "reward": 0.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r02",
+            "reward": 1.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r22",
+            "reward": 1.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r03",
+            "reward": 0.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r23",
+            "reward": 1.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r24",
+            "reward": 0.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r04",
+            "reward": 1.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r25",
+            "reward": 1.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r05",
+            "reward": 1.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r26",
+            "reward": 1.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r06",
+            "reward": 0.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r27",
+            "reward": 0.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r07",
+            "reward": 1.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r08",
+            "reward": 1.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r28",
+            "reward": 1.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r09",
+            "reward": 0.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r29",
+            "reward": 1.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r10",
+            "reward": 1.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r11",
+            "reward": 1.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r12",
+            "reward": 0.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r13",
+            "reward": 1.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r14",
+            "reward": 1.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r15",
+            "reward": 0.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r16",
+            "reward": 1.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r17",
+            "reward": 1.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r18",
+            "reward": 0.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r19",
+            "reward": 1.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          }
+        ],
+        "ips": 0.0,
+        "snips": null,
+        "weight_sum": 0.0,
+        "ess": 0.0
+      },
+      "clipped": {
+        "requests": 32,
+        "ips": 0.0,
+        "snips": null,
+        "ess": 0.0,
+        "ess_ratio": 0.0,
+        "coverage": 0.0,
+        "zero_propensity_rows": 0,
+        "infinite_weight_rows": 0,
+        "max_weight": 0.0,
+        "weight_sum": 0.0,
+        "bootstrap": {
+          "repeats": 200,
+          "resampled_requests": 32,
+          "ips": {
+            "low": 0.0,
+            "high": 0.0
+          },
+          "snips": {
+            "low": null,
+            "high": null
+          }
+        },
+        "clip_threshold": 1.0,
+        "bias": "裁剪引入偏差（有偏估计量）；数值不能当成无偏策略收益，区间也只描述裁剪后估计量"
+      },
+      "scenario": "目标只推荐从未出现在日志候选集的新项目。零支持质量使其价值不可识别；不得把 0 值读成“新店没有价值”。"
+    },
+    "deployment_display_target": {
+      "reward": "reward_click",
+      "unclipped": {
+        "requests": 6,
+        "ips": 1.0,
+        "snips": 1.0,
+        "ess": 3.0,
+        "ess_ratio": 0.5,
+        "coverage": 0.5,
+        "zero_propensity_rows": 0,
+        "infinite_weight_rows": 0,
+        "max_weight": 2.0,
+        "weight_sum": 6.0,
+        "bootstrap": {
+          "repeats": 200,
+          "resampled_requests": 6,
+          "ips": {
+            "low": 0.3333333333333333,
+            "high": 1.6666666666666667
+          },
+          "snips": {
+            "low": 1.0,
+            "high": 1.0
+          }
+        },
+        "bias": "在支持核验通过时无偏（针对给定记录策略与目标策略）；支持不足时只读作已识别下界",
+        "full_policy_value_identifiable": true
+      },
+      "support": {
+        "logging_policy_uniform_verified": true,
+        "status": "verified_full_support",
+        "proven_zero_support_requests": [],
+        "proven_zero_support_request_count": 0,
+        "proven_zero_support_mass_total": 0,
+        "unverified_support_requests": [],
+        "unverified_support_request_count": 0,
+        "full_policy_value_identifiable": true,
+        "value_reporting": "full",
+        "statement": "目标支持集内每个动作的记录概率均已核验为正，在此核验下 IPS 是完整目标价值的无偏估计（仍仅限离线、无模型错设之外的假设）。"
+      },
+      "hand_verifiable": {
+        "rows": [
+          {
+            "request_id": "r14",
+            "reward": 1.0,
+            "target_prob": 0.3333333333333333,
+            "logging_prob": 0.16666666666666666,
+            "weight": 2.0,
+            "contribution_to_ips": 0.3333333333333333
+          },
+          {
+            "request_id": "r15",
+            "reward": 0.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r16",
+            "reward": 1.0,
+            "target_prob": 0.3333333333333333,
+            "logging_prob": 0.16666666666666666,
+            "weight": 2.0,
+            "contribution_to_ips": 0.3333333333333333
+          },
+          {
+            "request_id": "r17",
+            "reward": 1.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r18",
+            "reward": 0.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r19",
+            "reward": 1.0,
+            "target_prob": 0.3333333333333333,
+            "logging_prob": 0.16666666666666666,
+            "weight": 2.0,
+            "contribution_to_ips": 0.3333333333333333
+          }
+        ],
+        "ips": 1.0,
+        "snips": 1.0,
+        "weight_sum": 6.0,
+        "ess": 3.0
+      },
+      "clipped": {
+        "requests": 6,
+        "ips": 1.0,
+        "snips": 1.0,
+        "ess": 3.0,
+        "ess_ratio": 0.5,
+        "coverage": 0.5,
+        "zero_propensity_rows": 0,
+        "infinite_weight_rows": 0,
+        "max_weight": 2.0,
+        "weight_sum": 6.0,
+        "bootstrap": {
+          "repeats": 200,
+          "resampled_requests": 6,
+          "ips": {
+            "low": 0.3333333333333333,
+            "high": 1.6666666666666667
+          },
+          "snips": {
+            "low": 1.0,
+            "high": 1.0
+          }
+        },
+        "clip_threshold": 2.0,
+        "bias": "裁剪引入偏差（有偏估计量）；数值不能当成无偏策略收益，区间也只描述裁剪后估计量"
+      }
+    },
+    "randomized_list_target": {
+      "reward": "reward_click",
+      "unclipped": {
+        "requests": 6,
+        "ips": 0.7934081321542377,
+        "snips": 0.9352575427697283,
+        "ess": 3.348939461357168,
+        "ess_ratio": 0.5581565768928614,
+        "coverage": 0.8333333333333334,
+        "zero_propensity_rows": 0,
+        "infinite_weight_rows": 0,
+        "max_weight": 1.8549431268778236,
+        "weight_sum": 5.089987062630412,
+        "bootstrap": {
+          "repeats": 200,
+          "resampled_requests": 6,
+          "ips": {
+            "low": 0.2259716465235778,
+            "high": 1.4444944150418197
+          },
+          "snips": {
+            "low": 0.6725762333268446,
+            "high": 1.0
+          }
+        },
+        "bias": "在支持核验通过时无偏（针对给定记录策略与目标策略）；支持不足时只读作已识别下界",
+        "full_policy_value_identifiable": true
+      },
+      "support": {
+        "logging_policy_uniform_verified": true,
+        "status": "verified_full_support",
+        "proven_zero_support_requests": [],
+        "proven_zero_support_request_count": 0,
+        "proven_zero_support_mass_total": 0,
+        "unverified_support_requests": [],
+        "unverified_support_request_count": 0,
+        "full_policy_value_identifiable": true,
+        "value_reporting": "full",
+        "statement": "目标支持集内每个动作的记录概率均已核验为正，在此核验下 IPS 是完整目标价值的无偏估计（仍仅限离线、无模型错设之外的假设）。"
+      },
+      "hand_verifiable": {
+        "rows": [
+          {
+            "request_id": "r14",
+            "reward": 1.0,
+            "target_prob": 0.22597164652357776,
+            "logging_prob": 0.16666666666666666,
+            "weight": 1.3558298791414667,
+            "contribution_to_ips": 0.2259716465235778
+          },
+          {
+            "request_id": "r15",
+            "reward": 0.0,
+            "target_prob": 0.023229466195603714,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.1393767971736223,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r16",
+            "reward": 1.0,
+            "target_prob": 0.25827929781768927,
+            "logging_prob": 0.16666666666666666,
+            "weight": 1.5496757869061357,
+            "contribution_to_ips": 0.25827929781768927
+          },
+          {
+            "request_id": "r17",
+            "reward": 1.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r18",
+            "reward": 0.0,
+            "target_prob": 0.03169357875522723,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.19016147253136337,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r19",
+            "reward": 1.0,
+            "target_prob": 0.3091571878129706,
+            "logging_prob": 0.16666666666666666,
+            "weight": 1.8549431268778236,
+            "contribution_to_ips": 0.3091571878129706
+          }
+        ],
+        "ips": 0.7934081321542377,
+        "snips": 0.9352575427697283,
+        "weight_sum": 5.089987062630412,
+        "ess": 3.348939461357168
+      },
+      "clipped": {
+        "requests": 6,
+        "ips": 0.7934081321542377,
+        "snips": 0.9352575427697283,
+        "ess": 3.348939461357168,
+        "ess_ratio": 0.5581565768928614,
+        "coverage": 0.8333333333333334,
+        "zero_propensity_rows": 0,
+        "infinite_weight_rows": 0,
+        "max_weight": 1.8549431268778236,
+        "weight_sum": 5.089987062630412,
+        "bootstrap": {
+          "repeats": 200,
+          "resampled_requests": 6,
+          "ips": {
+            "low": 0.2259716465235778,
+            "high": 1.4444944150418197
+          },
+          "snips": {
+            "low": 0.6725762333268446,
+            "high": 1.0
+          }
+        },
+        "clip_threshold": 2.0,
+        "bias": "裁剪引入偏差（有偏估计量）；数值不能当成无偏策略收益，区间也只描述裁剪后估计量"
+      }
+    }
+  },
+  "item_version_demo": {
+    "before_2026-10-20": {
+      "item": "f",
+      "category": "family",
+      "open": true,
+      "effective_at": "2026-09-01T00:00:00+08:00",
+      "known_at": "2026-09-01T00:00:00+08:00"
+    },
+    "from_2026-10-20": {
+      "item": "f",
+      "category": "family",
+      "open": false,
+      "effective_at": "2026-10-20T00:00:00+08:00",
+      "known_at": "2026-10-19T00:00:00+08:00"
+    },
+    "after_known_at": {
+      "item": "f",
+      "category": "family",
+      "open": false,
+      "effective_at": "2026-10-20T00:00:00+08:00",
+      "known_at": "2026-10-19T00:00:00+08:00"
+    },
+    "per_request": [
+      {
+        "split": "train",
+        "request_id": "r00",
+        "requested_at": "2026-10-03T10:00:00+08:00",
+        "f_open": true,
+        "f_exclusion": null
+      },
+      {
+        "split": "train",
+        "request_id": "r20",
+        "requested_at": "2026-10-03T14:00:00+08:00",
+        "f_open": true,
+        "f_exclusion": null
+      },
+      {
+        "split": "train",
+        "request_id": "r01",
+        "requested_at": "2026-10-04T11:00:00+08:00",
+        "f_open": true,
+        "f_exclusion": null
+      },
+      {
+        "split": "train",
+        "request_id": "r21",
+        "requested_at": "2026-10-04T15:00:00+08:00",
+        "f_open": true,
+        "f_exclusion": null
+      },
+      {
+        "split": "train",
+        "request_id": "r02",
+        "requested_at": "2026-10-05T12:00:00+08:00",
+        "f_open": true,
+        "f_exclusion": null
+      },
+      {
+        "split": "train",
+        "request_id": "r22",
+        "requested_at": "2026-10-05T16:00:00+08:00",
+        "f_open": true,
+        "f_exclusion": null
+      },
+      {
+        "split": "train",
+        "request_id": "r03",
+        "requested_at": "2026-10-06T13:00:00+08:00",
+        "f_open": true,
+        "f_exclusion": null
+      },
+      {
+        "split": "train",
+        "request_id": "r23",
+        "requested_at": "2026-10-06T17:00:00+08:00",
+        "f_open": true,
+        "f_exclusion": null
+      },
+      {
+        "split": "train",
+        "request_id": "r24",
+        "requested_at": "2026-10-07T10:00:00+08:00",
+        "f_open": true,
+        "f_exclusion": null
+      },
+      {
+        "split": "train",
+        "request_id": "r04",
+        "requested_at": "2026-10-07T14:00:00+08:00",
+        "f_open": true,
+        "f_exclusion": null
+      },
+      {
+        "split": "train",
+        "request_id": "r25",
+        "requested_at": "2026-10-08T11:00:00+08:00",
+        "f_open": true,
+        "f_exclusion": null
+      },
+      {
+        "split": "train",
+        "request_id": "r05",
+        "requested_at": "2026-10-08T15:00:00+08:00",
+        "f_open": true,
+        "f_exclusion": null
+      },
+      {
+        "split": "train",
+        "request_id": "r26",
+        "requested_at": "2026-10-09T12:00:00+08:00",
+        "f_open": true,
+        "f_exclusion": null
+      },
+      {
+        "split": "train",
+        "request_id": "r06",
+        "requested_at": "2026-10-09T16:00:00+08:00",
+        "f_open": true,
+        "f_exclusion": null
+      },
+      {
+        "split": "train",
+        "request_id": "r27",
+        "requested_at": "2026-10-10T13:00:00+08:00",
+        "f_open": true,
+        "f_exclusion": null
+      },
+      {
+        "split": "train",
+        "request_id": "r07",
+        "requested_at": "2026-10-10T17:00:00+08:00",
+        "f_open": true,
+        "f_exclusion": null
+      },
+      {
+        "split": "train",
+        "request_id": "r08",
+        "requested_at": "2026-10-11T10:00:00+08:00",
+        "f_open": true,
+        "f_exclusion": null
+      },
+      {
+        "split": "train",
+        "request_id": "r28",
+        "requested_at": "2026-10-11T14:00:00+08:00",
+        "f_open": true,
+        "f_exclusion": null
+      },
+      {
+        "split": "validation",
+        "request_id": "r09",
+        "requested_at": "2026-10-12T11:00:00+08:00",
+        "f_open": true,
+        "f_exclusion": null
+      },
+      {
+        "split": "validation",
+        "request_id": "r29",
+        "requested_at": "2026-10-12T15:00:00+08:00",
+        "f_open": true,
+        "f_exclusion": null
+      },
+      {
+        "split": "validation",
+        "request_id": "r10",
+        "requested_at": "2026-10-13T12:00:00+08:00",
+        "f_open": true,
+        "f_exclusion": null
+      },
+      {
+        "split": "validation",
+        "request_id": "r11",
+        "requested_at": "2026-10-14T13:00:00+08:00",
+        "f_open": true,
+        "f_exclusion": null
+      },
+      {
+        "split": "validation",
+        "request_id": "r12",
+        "requested_at": "2026-10-15T14:00:00+08:00",
+        "f_open": true,
+        "f_exclusion": null
+      },
+      {
+        "split": "validation",
+        "request_id": "r13",
+        "requested_at": "2026-10-16T15:00:00+08:00",
+        "f_open": true,
+        "f_exclusion": null
+      },
+      {
+        "split": "test",
+        "request_id": "r14",
+        "requested_at": "2026-10-17T16:00:00+08:00",
+        "f_open": true,
+        "f_exclusion": null
+      },
+      {
+        "split": "test",
+        "request_id": "r15",
+        "requested_at": "2026-10-18T17:00:00+08:00",
+        "f_open": true,
+        "f_exclusion": null
+      },
+      {
+        "split": "test",
+        "request_id": "r16",
+        "requested_at": "2026-10-19T10:00:00+08:00",
+        "f_open": true,
+        "f_exclusion": null
+      },
+      {
+        "split": "test",
+        "request_id": "r17",
+        "requested_at": "2026-10-20T11:00:00+08:00",
+        "f_open": false,
+        "f_exclusion": "closed_at_request"
+      },
+      {
+        "split": "test",
+        "request_id": "r18",
+        "requested_at": "2026-10-21T12:00:00+08:00",
+        "f_open": false,
+        "f_exclusion": "closed_at_request"
+      },
+      {
+        "split": "test",
+        "request_id": "r19",
+        "requested_at": "2026-10-22T13:00:00+08:00",
+        "f_open": false,
+        "f_exclusion": "closed_at_request"
+      }
+    ],
+    "note": "闭店版本 known_at=2026-10-19、effective_at=2026-10-20；只影响 2026-10-20 起的请求，此前请求仍使用营业版本。"
+  },
+  "cold_start_demo": {
+    "synthetic_item": "g（仅用于演示，不进入任何评估集合）",
+    "base_rate_rule": {
+      "item": "g",
+      "train_clicks": 0,
+      "train_logged_selections": 0,
+      "cold_start": true,
+      "prior": 0.6363636363636364,
+      "score": 0.6363636363636364,
+      "formula": "(0 + 0.6363636363636364*2) / (0 + 2)"
+    },
+    "baseline_score": 0.6363636363636364,
+    "ranker_cold_start_score": 0.5183030752849369,
+    "ranker_features_used": {
+      "item_click_rate_train": 0.5,
+      "item_redeem_rate_train": 0.5,
+      "log1p_train_views": 0.0,
+      "category": "dining",
+      "hour_bucket_from_training_hours": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "category_known_in_training": true,
+      "reason": "训练集无该项目，率与曝光特征取中性值；仅业态与训练已见的时段可贡献分数"
+    },
+    "if_future_popularity_were_backfilled": 0.8948306595365418,
+    "difference_if_backfilled": 0.2584670231729055,
+    "note": "回填未来热门度会把冷启动项目分数抬高，属于时间穿越；流水线拒绝该做法。"
+  },
+  "fill_shortfall_demo": {
+    "request": {
+      "request_id": "demo-fill-shortfall",
+      "candidates": [
+        "a",
+        "b",
+        "c"
+      ],
+      "categories": {
+        "a": "dining",
+        "b": "dining",
+        "c": "dining"
+      },
+      "requested_list_size": 3,
+      "max_per_category": 2,
+      "note": "合成演示，不属于 fixtures 评估集"
+    },
+    "display_list": [
+      "a",
+      "b"
+    ],
+    "fill": {
+      "requested_list_size": 3,
+      "available_count": 3,
+      "final_size": 2,
+      "max_per_category": 2,
+      "excluded": {},
+      "reasons": [
+        "同业态上限 2：{'dining': 3}，最多可填 2 项"
+      ]
+    },
+    "action_probs": {
+      "a": 0.5,
+      "b": 0.5,
+      "c": 0.0
+    }
+  },
+  "baseline_model": {
+    "prior_mean": 0.6363636363636364,
+    "pseudo_views": 2,
+    "train_stats": {
+      "a": {
+        "item": "a",
+        "train_clicks": 1,
+        "train_logged_selections": 4,
+        "cold_start": false,
+        "prior": 0.6363636363636364,
+        "score": 0.37878787878787873,
+        "formula": "(1 + 0.6363636363636364*2) / (4 + 2)"
+      },
+      "b": {
+        "item": "b",
+        "train_clicks": 3,
+        "train_logged_selections": 3,
+        "cold_start": false,
+        "prior": 0.6363636363636364,
+        "score": 0.8545454545454545,
+        "formula": "(3 + 0.6363636363636364*2) / (3 + 2)"
+      },
+      "c": {
+        "item": "c",
+        "train_clicks": 4,
+        "train_logged_selections": 5,
+        "cold_start": false,
+        "prior": 0.6363636363636364,
+        "score": 0.7532467532467532,
+        "formula": "(4 + 0.6363636363636364*2) / (5 + 2)"
+      },
+      "d": {
+        "item": "d",
+        "train_clicks": 0,
+        "train_logged_selections": 3,
+        "cold_start": false,
+        "prior": 0.6363636363636364,
+        "score": 0.2545454545454545,
+        "formula": "(0 + 0.6363636363636364*2) / (3 + 2)"
+      },
+      "e": {
+        "item": "e",
+        "train_clicks": 3,
+        "train_logged_selections": 3,
+        "cold_start": false,
+        "prior": 0.6363636363636364,
+        "score": 0.8545454545454545,
+        "formula": "(3 + 0.6363636363636364*2) / (3 + 2)"
+      },
+      "f": {
+        "item": "f",
+        "train_clicks": 2,
+        "train_logged_selections": 2,
+        "cold_start": false,
+        "prior": 0.6363636363636364,
+        "score": 0.8181818181818181,
+        "formula": "(2 + 0.6363636363636364*2) / (2 + 2)"
+      }
+    },
+    "cold_start_rule": "训练集未出现项目取先验 1/2；不继承未来点击"
+  },
+  "learned_ranker": {
+    "feature_names": [
+      "intercept",
+      "category=dining",
+      "category=entertainment",
+      "category=family",
+      "hour=morning",
+      "hour=afternoon",
+      "hour=evening",
+      "item_click_rate_train",
+      "item_redeem_rate_train",
+      "log1p_train_selections"
+    ],
+    "weights": {
+      "intercept": -6.0448913774560955,
+      "category=dining": 0.736861769936644,
+      "category=entertainment": -0.3425739807612166,
+      "category=family": -0.7102327586012771,
+      "hour=morning": -0.42338823997655395,
+      "hour=afternoon": 0.42338823997655395,
+      "hour=evening": 0.0,
+      "item_click_rate_train": 12.581767165552062,
+      "item_redeem_rate_train": -1.819217892108703,
+      "log1p_train_selections": -1.2286812476860767
+    },
+    "training": {
+      "epochs": 400,
+      "learning_rate": 0.5,
+      "l2": 0.01,
+      "sample_count": 20,
+      "weighted_loss_curve": [
+        0.693147,
+        0.257228,
+        0.245415,
+        0.243095,
+        0.242497,
+        0.242332,
+        0.242285,
+        0.242272,
+        0.242268
+      ],
+      "reward": "reward_click",
+      "target_leakage_guard": "项目率特征留一法剔除当前行；均值/方差只来自训练集"
+    },
+    "tuning": {
+      "objective": "validation 上的 1/propensity 加权对数损失（越低越好）",
+      "grid": [
+        {
+          "learning_rate": 0.1,
+          "l2": 0.01,
+          "epochs": 200,
+          "validation_weighted_log_loss": 0.13883694684336956
+        },
+        {
+          "learning_rate": 0.25,
+          "l2": 0.01,
+          "epochs": 300,
+          "validation_weighted_log_loss": 0.09174646919563446
+        },
+        {
+          "learning_rate": 0.25,
+          "l2": 0.05,
+          "epochs": 300,
+          "validation_weighted_log_loss": 0.17643605691058667
+        },
+        {
+          "learning_rate": 0.5,
+          "l2": 0.01,
+          "epochs": 400,
+          "validation_weighted_log_loss": 0.08779441233211344
+        }
+      ],
+      "selected": {
+        "learning_rate": 0.5,
+        "l2": 0.01,
+        "epochs": 400
+      },
+      "selected_validation_loss": 0.08779441233211344,
+      "test_used_for_tuning": false,
+      "note": "验证集来自 train_end 与 validation_end 之间的请求，与测试集按请求时间互斥。"
+    }
+  },
+  "test_evaluation": {
+    "baseline_popularity": {
+      "reward": "reward_click",
+      "unclipped": {
+        "requests": 6,
+        "ips": 0.6666666666666666,
+        "snips": 1.0,
+        "ess": 2.0,
+        "ess_ratio": 0.3333333333333333,
+        "coverage": 0.3333333333333333,
+        "zero_propensity_rows": 0,
+        "infinite_weight_rows": 0,
+        "max_weight": 2.0,
+        "weight_sum": 4.0,
+        "bootstrap": {
+          "repeats": 200,
+          "resampled_requests": 6,
+          "ips": {
+            "low": 0.0,
+            "high": 1.3416666666666683
+          },
+          "snips": {
+            "low": 1.0,
+            "high": 1.0
+          }
+        },
+        "bias": "在支持核验通过时无偏（针对给定记录策略与目标策略）；支持不足时只读作已识别下界",
+        "full_policy_value_identifiable": true
+      },
+      "support": {
+        "logging_policy_uniform_verified": true,
+        "status": "verified_full_support",
+        "proven_zero_support_requests": [],
+        "proven_zero_support_request_count": 0,
+        "proven_zero_support_mass_total": 0,
+        "unverified_support_requests": [],
+        "unverified_support_request_count": 0,
+        "full_policy_value_identifiable": true,
+        "value_reporting": "full",
+        "statement": "目标支持集内每个动作的记录概率均已核验为正，在此核验下 IPS 是完整目标价值的无偏估计（仍仅限离线、无模型错设之外的假设）。"
+      },
+      "hand_verifiable": {
+        "rows": [
+          {
+            "request_id": "r14",
+            "reward": 1.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r15",
+            "reward": 0.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r16",
+            "reward": 1.0,
+            "target_prob": 0.3333333333333333,
+            "logging_prob": 0.16666666666666666,
+            "weight": 2.0,
+            "contribution_to_ips": 0.3333333333333333
+          },
+          {
+            "request_id": "r17",
+            "reward": 1.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r18",
+            "reward": 0.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r19",
+            "reward": 1.0,
+            "target_prob": 0.3333333333333333,
+            "logging_prob": 0.16666666666666666,
+            "weight": 2.0,
+            "contribution_to_ips": 0.3333333333333333
+          }
+        ],
+        "ips": 0.6666666666666666,
+        "snips": 1.0,
+        "weight_sum": 4.0,
+        "ess": 2.0
+      },
+      "clipped": {
+        "requests": 6,
+        "ips": 0.6666666666666666,
+        "snips": 1.0,
+        "ess": 2.0,
+        "ess_ratio": 0.3333333333333333,
+        "coverage": 0.3333333333333333,
+        "zero_propensity_rows": 0,
+        "infinite_weight_rows": 0,
+        "max_weight": 2.0,
+        "weight_sum": 4.0,
+        "bootstrap": {
+          "repeats": 200,
+          "resampled_requests": 6,
+          "ips": {
+            "low": 0.0,
+            "high": 1.3416666666666683
+          },
+          "snips": {
+            "low": 1.0,
+            "high": 1.0
+          }
+        },
+        "clip_threshold": 2.0,
+        "bias": "裁剪引入偏差（有偏估计量）；数值不能当成无偏策略收益，区间也只描述裁剪后估计量"
+      },
+      "target_definition": "部署展示策略：π(a)=1/|最终列表|（a 在列表中）；已含重排约束与最终均匀抽取",
+      "reading_guidance": "测试集只有 6 个请求，且每个请求只记录 1 个动作；IPS/SNIPS 的点估计与区间都很不稳定，最大值 1.0 不代表线上最佳。该数值只说明：在给定记录策略与目标策略下，对日志选中动作的加权回报估计。",
+      "randomized_list_policy": {
+        "reward": "reward_click",
+        "unclipped": {
+          "requests": 6,
+          "ips": 0.6930556848859801,
+          "snips": 0.8190979625963047,
+          "ess": 4.076774454921572,
+          "ess_ratio": 0.6794624091535953,
+          "coverage": 0.8333333333333334,
+          "zero_propensity_rows": 0,
+          "infinite_weight_rows": 0,
+          "max_weight": 1.6047122821822621,
+          "weight_sum": 5.076723785437286,
+          "bootstrap": {
+            "repeats": 200,
+            "resampled_requests": 6,
+            "ips": {
+              "low": 0.19069024192848005,
+              "high": 1.260790542622373
+            },
+            "snips": {
+              "low": 0.38382148566547075,
+              "high": 1.0
+            }
+          },
+          "bias": "在支持核验通过时无偏（针对给定记录策略与目标策略）；支持不足时只读作已识别下界",
+          "full_policy_value_identifiable": true
+        },
+        "support": {
+          "logging_policy_uniform_verified": true,
+          "status": "verified_full_support",
+          "proven_zero_support_requests": [],
+          "proven_zero_support_request_count": 0,
+          "proven_zero_support_mass_total": 0,
+          "unverified_support_requests": [],
+          "unverified_support_request_count": 0,
+          "full_policy_value_identifiable": true,
+          "value_reporting": "full",
+          "statement": "目标支持集内每个动作的记录概率均已核验为正，在此核验下 IPS 是完整目标价值的无偏估计（仍仅限离线、无模型错设之外的假设）。"
+        },
+        "hand_verifiable": {
+          "rows": [
+            {
+              "request_id": "r14",
+              "reward": 1.0,
+              "target_prob": 0.19069024192848003,
+              "logging_prob": 0.16666666666666666,
+              "weight": 1.1441414515708803,
+              "contribution_to_ips": 0.19069024192848005
+            },
+            {
+              "request_id": "r15",
+              "reward": 0.0,
+              "target_prob": 0.056316856689610846,
+              "logging_prob": 0.16666666666666666,
+              "weight": 0.3379011401376651,
+              "contribution_to_ips": 0.0
+            },
+            {
+              "request_id": "r16",
+              "reward": 1.0,
+              "target_prob": 0.23491339592712301,
+              "logging_prob": 0.16666666666666666,
+              "weight": 1.409480375562738,
+              "contribution_to_ips": 0.23491339592712301
+            },
+            {
+              "request_id": "r17",
+              "reward": 1.0,
+              "target_prob": 0.0,
+              "logging_prob": 0.16666666666666666,
+              "weight": 0.0,
+              "contribution_to_ips": 0.0
+            },
+            {
+              "request_id": "r18",
+              "reward": 0.0,
+              "target_prob": 0.09674808933062341,
+              "logging_prob": 0.16666666666666666,
+              "weight": 0.5804885359837405,
+              "contribution_to_ips": 0.0
+            },
+            {
+              "request_id": "r19",
+              "reward": 1.0,
+              "target_prob": 0.267452047030377,
+              "logging_prob": 0.16666666666666666,
+              "weight": 1.6047122821822621,
+              "contribution_to_ips": 0.267452047030377
+            }
+          ],
+          "ips": 0.6930556848859801,
+          "snips": 0.8190979625963047,
+          "weight_sum": 5.076723785437286,
+          "ess": 4.076774454921572
+        },
+        "clipped": {
+          "requests": 6,
+          "ips": 0.6930556848859801,
+          "snips": 0.8190979625963047,
+          "ess": 4.076774454921572,
+          "ess_ratio": 0.6794624091535953,
+          "coverage": 0.8333333333333334,
+          "zero_propensity_rows": 0,
+          "infinite_weight_rows": 0,
+          "max_weight": 1.6047122821822621,
+          "weight_sum": 5.076723785437286,
+          "bootstrap": {
+            "repeats": 200,
+            "resampled_requests": 6,
+            "ips": {
+              "low": 0.19069024192848005,
+              "high": 1.260790542622373
+            },
+            "snips": {
+              "low": 0.38382148566547075,
+              "high": 1.0
+            }
+          },
+          "clip_threshold": 2.0,
+          "bias": "裁剪引入偏差（有偏估计量）；数值不能当成无偏策略收益，区间也只描述裁剪后估计量"
+        }
+      }
+    },
+    "learned_ranker": {
+      "reward": "reward_click",
+      "unclipped": {
+        "requests": 6,
+        "ips": 1.0,
+        "snips": 1.0,
+        "ess": 3.0,
+        "ess_ratio": 0.5,
+        "coverage": 0.5,
+        "zero_propensity_rows": 0,
+        "infinite_weight_rows": 0,
+        "max_weight": 2.0,
+        "weight_sum": 6.0,
+        "bootstrap": {
+          "repeats": 200,
+          "resampled_requests": 6,
+          "ips": {
+            "low": 0.3333333333333333,
+            "high": 1.6666666666666667
+          },
+          "snips": {
+            "low": 1.0,
+            "high": 1.0
+          }
+        },
+        "bias": "在支持核验通过时无偏（针对给定记录策略与目标策略）；支持不足时只读作已识别下界",
+        "full_policy_value_identifiable": true
+      },
+      "support": {
+        "logging_policy_uniform_verified": true,
+        "status": "verified_full_support",
+        "proven_zero_support_requests": [],
+        "proven_zero_support_request_count": 0,
+        "proven_zero_support_mass_total": 0,
+        "unverified_support_requests": [],
+        "unverified_support_request_count": 0,
+        "full_policy_value_identifiable": true,
+        "value_reporting": "full",
+        "statement": "目标支持集内每个动作的记录概率均已核验为正，在此核验下 IPS 是完整目标价值的无偏估计（仍仅限离线、无模型错设之外的假设）。"
+      },
+      "hand_verifiable": {
+        "rows": [
+          {
+            "request_id": "r14",
+            "reward": 1.0,
+            "target_prob": 0.3333333333333333,
+            "logging_prob": 0.16666666666666666,
+            "weight": 2.0,
+            "contribution_to_ips": 0.3333333333333333
+          },
+          {
+            "request_id": "r15",
+            "reward": 0.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r16",
+            "reward": 1.0,
+            "target_prob": 0.3333333333333333,
+            "logging_prob": 0.16666666666666666,
+            "weight": 2.0,
+            "contribution_to_ips": 0.3333333333333333
+          },
+          {
+            "request_id": "r17",
+            "reward": 1.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r18",
+            "reward": 0.0,
+            "target_prob": 0.0,
+            "logging_prob": 0.16666666666666666,
+            "weight": 0.0,
+            "contribution_to_ips": 0.0
+          },
+          {
+            "request_id": "r19",
+            "reward": 1.0,
+            "target_prob": 0.3333333333333333,
+            "logging_prob": 0.16666666666666666,
+            "weight": 2.0,
+            "contribution_to_ips": 0.3333333333333333
+          }
+        ],
+        "ips": 1.0,
+        "snips": 1.0,
+        "weight_sum": 6.0,
+        "ess": 3.0
+      },
+      "clipped": {
+        "requests": 6,
+        "ips": 1.0,
+        "snips": 1.0,
+        "ess": 3.0,
+        "ess_ratio": 0.5,
+        "coverage": 0.5,
+        "zero_propensity_rows": 0,
+        "infinite_weight_rows": 0,
+        "max_weight": 2.0,
+        "weight_sum": 6.0,
+        "bootstrap": {
+          "repeats": 200,
+          "resampled_requests": 6,
+          "ips": {
+            "low": 0.3333333333333333,
+            "high": 1.6666666666666667
+          },
+          "snips": {
+            "low": 1.0,
+            "high": 1.0
+          }
+        },
+        "clip_threshold": 2.0,
+        "bias": "裁剪引入偏差（有偏估计量）；数值不能当成无偏策略收益，区间也只描述裁剪后估计量"
+      },
+      "target_definition": "部署展示策略：π(a)=1/|最终列表|（a 在列表中）；已含重排约束与最终均匀抽取",
+      "reading_guidance": "测试集只有 6 个请求，且每个请求只记录 1 个动作；IPS/SNIPS 的点估计与区间都很不稳定，最大值 1.0 不代表线上最佳。该数值只说明：在给定记录策略与目标策略下，对日志选中动作的加权回报估计。",
+      "randomized_list_policy": {
+        "reward": "reward_click",
+        "unclipped": {
+          "requests": 6,
+          "ips": 0.7934081321542377,
+          "snips": 0.9352575427697283,
+          "ess": 3.348939461357168,
+          "ess_ratio": 0.5581565768928614,
+          "coverage": 0.8333333333333334,
+          "zero_propensity_rows": 0,
+          "infinite_weight_rows": 0,
+          "max_weight": 1.8549431268778236,
+          "weight_sum": 5.089987062630412,
+          "bootstrap": {
+            "repeats": 200,
+            "resampled_requests": 6,
+            "ips": {
+              "low": 0.2259716465235778,
+              "high": 1.4444944150418197
+            },
+            "snips": {
+              "low": 0.6725762333268446,
+              "high": 1.0
+            }
+          },
+          "bias": "在支持核验通过时无偏（针对给定记录策略与目标策略）；支持不足时只读作已识别下界",
+          "full_policy_value_identifiable": true
+        },
+        "support": {
+          "logging_policy_uniform_verified": true,
+          "status": "verified_full_support",
+          "proven_zero_support_requests": [],
+          "proven_zero_support_request_count": 0,
+          "proven_zero_support_mass_total": 0,
+          "unverified_support_requests": [],
+          "unverified_support_request_count": 0,
+          "full_policy_value_identifiable": true,
+          "value_reporting": "full",
+          "statement": "目标支持集内每个动作的记录概率均已核验为正，在此核验下 IPS 是完整目标价值的无偏估计（仍仅限离线、无模型错设之外的假设）。"
+        },
+        "hand_verifiable": {
+          "rows": [
+            {
+              "request_id": "r14",
+              "reward": 1.0,
+              "target_prob": 0.22597164652357776,
+              "logging_prob": 0.16666666666666666,
+              "weight": 1.3558298791414667,
+              "contribution_to_ips": 0.2259716465235778
+            },
+            {
+              "request_id": "r15",
+              "reward": 0.0,
+              "target_prob": 0.023229466195603714,
+              "logging_prob": 0.16666666666666666,
+              "weight": 0.1393767971736223,
+              "contribution_to_ips": 0.0
+            },
+            {
+              "request_id": "r16",
+              "reward": 1.0,
+              "target_prob": 0.25827929781768927,
+              "logging_prob": 0.16666666666666666,
+              "weight": 1.5496757869061357,
+              "contribution_to_ips": 0.25827929781768927
+            },
+            {
+              "request_id": "r17",
+              "reward": 1.0,
+              "target_prob": 0.0,
+              "logging_prob": 0.16666666666666666,
+              "weight": 0.0,
+              "contribution_to_ips": 0.0
+            },
+            {
+              "request_id": "r18",
+              "reward": 0.0,
+              "target_prob": 0.03169357875522723,
+              "logging_prob": 0.16666666666666666,
+              "weight": 0.19016147253136337,
+              "contribution_to_ips": 0.0
+            },
+            {
+              "request_id": "r19",
+              "reward": 1.0,
+              "target_prob": 0.3091571878129706,
+              "logging_prob": 0.16666666666666666,
+              "weight": 1.8549431268778236,
+              "contribution_to_ips": 0.3091571878129706
+            }
+          ],
+          "ips": 0.7934081321542377,
+          "snips": 0.9352575427697283,
+          "weight_sum": 5.089987062630412,
+          "ess": 3.348939461357168
+        },
+        "clipped": {
+          "requests": 6,
+          "ips": 0.7934081321542377,
+          "snips": 0.9352575427697283,
+          "ess": 3.348939461357168,
+          "ess_ratio": 0.5581565768928614,
+          "coverage": 0.8333333333333334,
+          "zero_propensity_rows": 0,
+          "infinite_weight_rows": 0,
+          "max_weight": 1.8549431268778236,
+          "weight_sum": 5.089987062630412,
+          "bootstrap": {
+            "repeats": 200,
+            "resampled_requests": 6,
+            "ips": {
+              "low": 0.2259716465235778,
+              "high": 1.4444944150418197
+            },
+            "snips": {
+              "low": 0.6725762333268446,
+              "high": 1.0
+            }
+          },
+          "clip_threshold": 2.0,
+          "bias": "裁剪引入偏差（有偏估计量）；数值不能当成无偏策略收益，区间也只描述裁剪后估计量"
+        }
+      }
+    }
+  },
+  "ranker_comparison": {
+    "predictive_weighted_log_loss": {
+      "baseline_popularity": 0.26137467794408686,
+      "learned_ranker": 0.1311139568518892,
+      "note": "1/propensity 加权对数损失，越低越好；衡量预测质量。"
+    },
+    "ranking": {
+      "baseline_popularity": {
+        "mean_reciprocal_rank_of_logged_action": 0.4083333333333334,
+        "logged_action_ranked_first": 0.16666666666666666
+      },
+      "learned_ranker": {
+        "mean_reciprocal_rank_of_logged_action": 0.4083333333333334,
+        "logged_action_ranked_first": 0.16666666666666666
+      },
+      "requests": 6,
+      "note": "排序指标只衡量对日志选中项目的预测排序，不等于策略价值。"
+    },
+    "per_request": [
+      {
+        "request_id": "r14",
+        "logged_item": "c",
+        "baseline_score": 0.7532467532467532,
+        "ranker_score": 0.8581948792833117,
+        "baseline_rank_of_logged_item": 4,
+        "ranker_rank_of_logged_item": 3,
+        "baseline_ranking": [
+          "b",
+          "e",
+          "f",
+          "c",
+          "a",
+          "d"
+        ],
+        "ranker_ranking": [
+          "b",
+          "e",
+          "c",
+          "f",
+          "a",
+          "d"
+        ]
+      },
+      {
+        "request_id": "r15",
+        "logged_item": "d",
+        "baseline_score": 0.2545454545454545,
+        "ranker_score": 0.004989131645006045,
+        "baseline_rank_of_logged_item": 6,
+        "ranker_rank_of_logged_item": 6,
+        "baseline_ranking": [
+          "b",
+          "e",
+          "f",
+          "c",
+          "a",
+          "d"
+        ],
+        "ranker_ranking": [
+          "b",
+          "e",
+          "c",
+          "f",
+          "a",
+          "d"
+        ]
+      },
+      {
+        "request_id": "r16",
+        "logged_item": "e",
+        "baseline_score": 0.8545454545454545,
+        "ranker_score": 0.8550103003098977,
+        "baseline_rank_of_logged_item": 2,
+        "ranker_rank_of_logged_item": 2,
+        "baseline_ranking": [
+          "b",
+          "e",
+          "f",
+          "c",
+          "a",
+          "d"
+        ],
+        "ranker_ranking": [
+          "b",
+          "e",
+          "c",
+          "f",
+          "a",
+          "d"
+        ]
+      },
+      {
+        "request_id": "r17",
+        "logged_item": "f",
+        "baseline_score": 0.8181818181818181,
+        "ranker_score": 0.6752812641524828,
+        "baseline_rank_of_logged_item": 3,
+        "ranker_rank_of_logged_item": 4,
+        "baseline_ranking": [
+          "b",
+          "e",
+          "f",
+          "c",
+          "a",
+          "d"
+        ],
+        "ranker_ranking": [
+          "b",
+          "e",
+          "c",
+          "f",
+          "a",
+          "d"
+        ]
+      },
+      {
+        "request_id": "r18",
+        "logged_item": "a",
+        "baseline_score": 0.37878787878787873,
+        "ranker_score": 0.04357964552111935,
+        "baseline_rank_of_logged_item": 5,
+        "ranker_rank_of_logged_item": 5,
+        "baseline_ranking": [
+          "b",
+          "e",
+          "f",
+          "c",
+          "a",
+          "d"
+        ],
+        "ranker_ranking": [
+          "b",
+          "e",
+          "c",
+          "f",
+          "a",
+          "d"
+        ]
+      },
+      {
+        "request_id": "r19",
+        "logged_item": "b",
+        "baseline_score": 0.8545454545454545,
+        "ranker_score": 0.9656705606360091,
+        "baseline_rank_of_logged_item": 1,
+        "ranker_rank_of_logged_item": 1,
+        "baseline_ranking": [
+          "b",
+          "e",
+          "f",
+          "c",
+          "a",
+          "d"
+        ],
+        "ranker_ranking": [
+          "b",
+          "e",
+          "c",
+          "f",
+          "a",
+          "d"
+        ]
+      }
+    ],
+    "interpretation": "预测排序更好的排序器，其目标列表在日志中的回报估计也可能更高；但两者是不同问题：日志选中项目本身受记录策略影响，排序指标高不代表线上因果收益。"
+  },
+  "pre_rerank_counterexample": {
+    "examples": [
+      {
+        "request_id": "r14",
+        "display_list": [
+          "b",
+          "e",
+          "c"
+        ],
+        "pre_rerank_normalized_scores": {
+          "a": 4.2792479067305844e-05,
+          "b": 0.4324714171125296,
+          "c": 0.14763742295126064,
+          "d": 2.9091825546469354e-05,
+          "e": 0.3095017144109075,
+          "f": 0.1103175612206885
+        },
+        "actual_draw_probs": {
+          "a": 0.0,
+          "b": 0.3333333333333333,
+          "c": 0.3333333333333333,
+          "d": 0.0,
+          "e": 0.3333333333333333,
+          "f": 0.0
+        },
+        "difference": {
+          "a": 4.2792479067305844e-05,
+          "b": 0.0991380837791963,
+          "c": -0.18569591038207267,
+          "d": 2.9091825546469354e-05,
+          "e": -0.0238316189224258,
+          "f": 0.1103175612206885
+        }
+      },
+      {
+        "request_id": "r15",
+        "display_list": [
+          "b",
+          "e",
+          "c"
+        ],
+        "pre_rerank_normalized_scores": {
+          "a": 4.2792479067305844e-05,
+          "b": 0.4324714171125296,
+          "c": 0.14763742295126064,
+          "d": 2.9091825546469354e-05,
+          "e": 0.3095017144109075,
+          "f": 0.1103175612206885
+        },
+        "actual_draw_probs": {
+          "a": 0.0,
+          "b": 0.3333333333333333,
+          "c": 0.3333333333333333,
+          "d": 0.0,
+          "e": 0.3333333333333333,
+          "f": 0.0
+        },
+        "difference": {
+          "a": 4.2792479067305844e-05,
+          "b": 0.0991380837791963,
+          "c": -0.18569591038207267,
+          "d": 2.9091825546469354e-05,
+          "e": -0.0238316189224258,
+          "f": 0.1103175612206885
+        }
+      },
+      {
+        "request_id": "r16",
+        "display_list": [
+          "b",
+          "e",
+          "c"
+        ],
+        "pre_rerank_normalized_scores": {
+          "a": 6.868778742933482e-05,
+          "b": 0.5809047602912706,
+          "c": 0.07736746287589592,
+          "d": 5.7938839727731936e-05,
+          "e": 0.29303187931841645,
+          "f": 0.04856927088725999
+        },
+        "actual_draw_probs": {
+          "a": 0.0,
+          "b": 0.3333333333333333,
+          "c": 0.3333333333333333,
+          "d": 0.0,
+          "e": 0.3333333333333333,
+          "f": 0.0
+        },
+        "difference": {
+          "a": 6.868778742933482e-05,
+          "b": 0.24757142695793727,
+          "c": -0.2559658704574374,
+          "d": 5.7938839727731936e-05,
+          "e": -0.04030145401491686,
+          "f": 0.04856927088725999
+        }
+      },
+      {
+        "request_id": "r17",
+        "display_list": [
+          "b",
+          "e",
+          "c"
+        ],
+        "pre_rerank_normalized_scores": {
+          "a": 6.868778742933482e-05,
+          "b": 0.5809047602912706,
+          "c": 0.07736746287589592,
+          "d": 5.7938839727731936e-05,
+          "e": 0.29303187931841645,
+          "f": 0.04856927088725999
+        },
+        "actual_draw_probs": {
+          "a": 0.0,
+          "b": 0.3333333333333333,
+          "c": 0.3333333333333333,
+          "d": 0.0,
+          "e": 0.3333333333333333,
+          "f": 0.0
+        },
+        "difference": {
+          "a": 6.868778742933482e-05,
+          "b": 0.24757142695793727,
+          "c": -0.2559658704574374,
+          "d": 5.7938839727731936e-05,
+          "e": -0.04030145401491686,
+          "f": 0.04856927088725999
+        }
+      },
+      {
+        "request_id": "r18",
+        "display_list": [
+          "b",
+          "e",
+          "c"
+        ],
+        "pre_rerank_normalized_scores": {
+          "a": 4.2792479067305844e-05,
+          "b": 0.4324714171125296,
+          "c": 0.14763742295126064,
+          "d": 2.9091825546469354e-05,
+          "e": 0.3095017144109075,
+          "f": 0.1103175612206885
+        },
+        "actual_draw_probs": {
+          "a": 0.0,
+          "b": 0.3333333333333333,
+          "c": 0.3333333333333333,
+          "d": 0.0,
+          "e": 0.3333333333333333,
+          "f": 0.0
+        },
+        "difference": {
+          "a": 4.2792479067305844e-05,
+          "b": 0.0991380837791963,
+          "c": -0.18569591038207267,
+          "d": 2.9091825546469354e-05,
+          "e": -0.0238316189224258,
+          "f": 0.1103175612206885
+        }
+      },
+      {
+        "request_id": "r19",
+        "display_list": [
+          "b",
+          "e",
+          "c"
+        ],
+        "pre_rerank_normalized_scores": {
+          "a": 4.2792479067305844e-05,
+          "b": 0.4324714171125296,
+          "c": 0.14763742295126064,
+          "d": 2.9091825546469354e-05,
+          "e": 0.3095017144109075,
+          "f": 0.1103175612206885
+        },
+        "actual_draw_probs": {
+          "a": 0.0,
+          "b": 0.3333333333333333,
+          "c": 0.3333333333333333,
+          "d": 0.0,
+          "e": 0.3333333333333333,
+          "f": 0.0
+        },
+        "difference": {
+          "a": 4.2792479067305844e-05,
+          "b": 0.0991380837791963,
+          "c": -0.18569591038207267,
+          "d": 2.9091825546469354e-05,
+          "e": -0.0238316189224258,
+          "f": 0.1103175612206885
+        }
+      }
+    ],
+    "note": "目标动作概率必须是“列表概率 × 1/列表长度”；重排前分数不含约束，会造成动作概率与真实抽取机制不一致。"
+  },
+  "test_list_examples": [
+    {
+      "request_id": "r14",
+      "requested_at": "2026-10-17T16:00:00+08:00",
+      "display_list": [
+        "b",
+        "e",
+        "c"
+      ],
+      "best_legal_list": [
+        "b",
+        "c",
+        "e"
+      ],
+      "available": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f"
+      ],
+      "excluded": {},
+      "item_categories": {
+        "a": "dining",
+        "b": "dining",
+        "c": "dining",
+        "d": "family",
+        "e": "entertainment",
+        "f": "family"
+      },
+      "scores": {
+        "a": 0.04357964552111935,
+        "b": 0.9656705606360091,
+        "c": 0.8581948792833117,
+        "d": 0.004989131645006045,
+        "e": 0.9322153001174543,
+        "f": 0.8290552496602369
+      },
+      "deterministic_draw_probs": {
+        "a": 0.0,
+        "b": 0.3333333333333333,
+        "c": 0.3333333333333333,
+        "d": 0.0,
+        "e": 0.3333333333333333,
+        "f": 0.0
+      },
+      "randomized_list_action_probs": {
+        "a": 0.021698152590669456,
+        "b": 0.2560618876881089,
+        "c": 0.22597164652357776,
+        "d": 0.023229466195603714,
+        "e": 0.25223653296674814,
+        "f": 0.22080231403529196
+      },
+      "fill_shortfall": {
+        "requested_list_size": 3,
+        "available_count": 6,
+        "final_size": 3,
+        "max_per_category": 2,
+        "excluded": {},
+        "reasons": []
+      },
+      "computation": {
+        "path": "randomized_list_policy",
+        "method": "exact_enumeration",
+        "legal_list_count": 19,
+        "enumerated_lists": 19,
+        "estimated_ops": 57,
+        "monte_carlo_standard_error_max": 0.0,
+        "action_prob_error": "0（精确枚举）"
+      },
+      "timing_seconds": 3.5254997783340514e-05
+    },
+    {
+      "request_id": "r15",
+      "requested_at": "2026-10-18T17:00:00+08:00",
+      "display_list": [
+        "b",
+        "e",
+        "c"
+      ],
+      "best_legal_list": [
+        "b",
+        "c",
+        "e"
+      ],
+      "available": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f"
+      ],
+      "excluded": {},
+      "item_categories": {
+        "a": "dining",
+        "b": "dining",
+        "c": "dining",
+        "d": "family",
+        "e": "entertainment",
+        "f": "family"
+      },
+      "scores": {
+        "a": 0.04357964552111935,
+        "b": 0.9656705606360091,
+        "c": 0.8581948792833117,
+        "d": 0.004989131645006045,
+        "e": 0.9322153001174543,
+        "f": 0.8290552496602369
+      },
+      "deterministic_draw_probs": {
+        "a": 0.0,
+        "b": 0.3333333333333333,
+        "c": 0.3333333333333333,
+        "d": 0.0,
+        "e": 0.3333333333333333,
+        "f": 0.0
+      },
+      "randomized_list_action_probs": {
+        "a": 0.021698152590669456,
+        "b": 0.2560618876881089,
+        "c": 0.22597164652357776,
+        "d": 0.023229466195603714,
+        "e": 0.25223653296674814,
+        "f": 0.22080231403529196
+      },
+      "fill_shortfall": {
+        "requested_list_size": 3,
+        "available_count": 6,
+        "final_size": 3,
+        "max_per_category": 2,
+        "excluded": {},
+        "reasons": []
+      },
+      "computation": {
+        "path": "randomized_list_policy",
+        "method": "exact_enumeration",
+        "legal_list_count": 19,
+        "enumerated_lists": 19,
+        "estimated_ops": 57,
+        "monte_carlo_standard_error_max": 0.0,
+        "action_prob_error": "0（精确枚举）"
+      },
+      "timing_seconds": 3.322100383229554e-05
+    },
+    {
+      "request_id": "r16",
+      "requested_at": "2026-10-19T10:00:00+08:00",
+      "display_list": [
+        "b",
+        "e",
+        "c"
+      ],
+      "best_legal_list": [
+        "b",
+        "c",
+        "e"
+      ],
+      "available": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e",
+        "f"
+      ],
+      "excluded": {},
+      "item_categories": {
+        "a": "dining",
+        "b": "dining",
+        "c": "dining",
+        "d": "family",
+        "e": "entertainment",
+        "f": "family"
+      },
+      "scores": {
+        "a": 0.019163773463346308,
+        "b": 0.923440841651378,
+        "c": 0.7218387912798402,
+        "d": 0.0021454284614351887,
+        "e": 0.8550103003098977,
+        "f": 0.6752812641524828
+      },
+      "deterministic_draw_probs": {
+        "a": 0.0,
+        "b": 0.3333333333333333,
+        "c": 0.3333333333333333,
+        "d": 0.0,
+        "e": 0.3333333333333333,
+        "f": 0.0
+      },
+      "randomized_list_action_probs": {
+        "a": 0.027392937832749438,
+        "b": 0.26768242997637637,
+        "c": 0.21301843379092894,
+        "d": 0.03161665756286736,
+        "e": 0.25827929781768927,
+        "f": 0.2020102430193887
+      },
+      "fill_shortfall": {
+        "requested_list_size": 3,
+        "available_count": 6,
+        "final_size": 3,
+        "max_per_category": 2,
+        "excluded": {},
+        "reasons": []
+      },
+      "computation": {
+        "path": "randomized_list_policy",
+        "method": "exact_enumeration",
+        "legal_list_count": 19,
+        "enumerated_lists": 19,
+        "estimated_ops": 57,
+        "monte_carlo_standard_error_max": 0.0,
+        "action_prob_error": "0（精确枚举）"
+      },
+      "timing_seconds": 3.4437005524523556e-05
+    },
+    {
+      "request_id": "r17",
+      "requested_at": "2026-10-20T11:00:00+08:00",
+      "display_list": [
+        "b",
+        "e",
+        "c"
+      ],
+      "best_legal_list": [
+        "b",
+        "c",
+        "e"
+      ],
+      "available": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "excluded": {
+        "f": "closed_at_request"
+      },
+      "item_categories": {
+        "a": "dining",
+        "b": "dining",
+        "c": "dining",
+        "d": "family",
+        "e": "entertainment",
+        "f": "family"
+      },
+      "scores": {
+        "a": 0.019163773463346308,
+        "b": 0.923440841651378,
+        "c": 0.7218387912798402,
+        "d": 0.0021454284614351887,
+        "e": 0.8550103003098977
+      },
+      "deterministic_draw_probs": {
+        "a": 0.0,
+        "b": 0.3333333333333333,
+        "c": 0.3333333333333333,
+        "d": 0.0,
+        "e": 0.3333333333333333,
+        "f": 0.0
+      },
+      "randomized_list_action_probs": {
+        "a": 0.03893684432537914,
+        "b": 0.3080235552503811,
+        "c": 0.2848243917740707,
+        "d": 0.05131174058832888,
+        "e": 0.31690346806184005,
+        "f": 0.0
+      },
+      "fill_shortfall": {
+        "requested_list_size": 3,
+        "available_count": 5,
+        "final_size": 3,
+        "max_per_category": 2,
+        "excluded": {
+          "f": "closed_at_request"
+        },
+        "reasons": []
+      },
+      "computation": {
+        "path": "randomized_list_policy",
+        "method": "exact_enumeration",
+        "legal_list_count": 9,
+        "enumerated_lists": 9,
+        "estimated_ops": 27,
+        "monte_carlo_standard_error_max": 0.0,
+        "action_prob_error": "0（精确枚举）"
+      },
+      "timing_seconds": 2.4345004931092262e-05
+    },
+    {
+      "request_id": "r18",
+      "requested_at": "2026-10-21T12:00:00+08:00",
+      "display_list": [
+        "b",
+        "e",
+        "c"
+      ],
+      "best_legal_list": [
+        "b",
+        "c",
+        "e"
+      ],
+      "available": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "excluded": {
+        "f": "closed_at_request"
+      },
+      "item_categories": {
+        "a": "dining",
+        "b": "dining",
+        "c": "dining",
+        "d": "family",
+        "e": "entertainment",
+        "f": "family"
+      },
+      "scores": {
+        "a": 0.04357964552111935,
+        "b": 0.9656705606360091,
+        "c": 0.8581948792833117,
+        "d": 0.004989131645006045,
+        "e": 0.9322153001174543
+      },
+      "deterministic_draw_probs": {
+        "a": 0.0,
+        "b": 0.3333333333333333,
+        "c": 0.3333333333333333,
+        "d": 0.0,
+        "e": 0.3333333333333333,
+        "f": 0.0
+      },
+      "randomized_list_action_probs": {
+        "a": 0.03169357875522723,
+        "b": 0.3091571878129706,
+        "c": 0.29904712041672304,
+        "d": 0.04010135274377802,
+        "e": 0.32000076027130114,
+        "f": 0.0
+      },
+      "fill_shortfall": {
+        "requested_list_size": 3,
+        "available_count": 5,
+        "final_size": 3,
+        "max_per_category": 2,
+        "excluded": {
+          "f": "closed_at_request"
+        },
+        "reasons": []
+      },
+      "computation": {
+        "path": "randomized_list_policy",
+        "method": "exact_enumeration",
+        "legal_list_count": 9,
+        "enumerated_lists": 9,
+        "estimated_ops": 27,
+        "monte_carlo_standard_error_max": 0.0,
+        "action_prob_error": "0（精确枚举）"
+      },
+      "timing_seconds": 2.5226006982848048e-05
+    },
+    {
+      "request_id": "r19",
+      "requested_at": "2026-10-22T13:00:00+08:00",
+      "display_list": [
+        "b",
+        "e",
+        "c"
+      ],
+      "best_legal_list": [
+        "b",
+        "c",
+        "e"
+      ],
+      "available": [
+        "a",
+        "b",
+        "c",
+        "d",
+        "e"
+      ],
+      "excluded": {
+        "f": "closed_at_request"
+      },
+      "item_categories": {
+        "a": "dining",
+        "b": "dining",
+        "c": "dining",
+        "d": "family",
+        "e": "entertainment",
+        "f": "family"
+      },
+      "scores": {
+        "a": 0.04357964552111935,
+        "b": 0.9656705606360091,
+        "c": 0.8581948792833117,
+        "d": 0.004989131645006045,
+        "e": 0.9322153001174543
+      },
+      "deterministic_draw_probs": {
+        "a": 0.0,
+        "b": 0.3333333333333333,
+        "c": 0.3333333333333333,
+        "d": 0.0,
+        "e": 0.3333333333333333,
+        "f": 0.0
+      },
+      "randomized_list_action_probs": {
+        "a": 0.03169357875522723,
+        "b": 0.3091571878129706,
+        "c": 0.29904712041672304,
+        "d": 0.04010135274377802,
+        "e": 0.32000076027130114,
+        "f": 0.0
+      },
+      "fill_shortfall": {
+        "requested_list_size": 3,
+        "available_count": 5,
+        "final_size": 3,
+        "max_per_category": 2,
+        "excluded": {
+          "f": "closed_at_request"
+        },
+        "reasons": []
+      },
+      "computation": {
+        "path": "randomized_list_policy",
+        "method": "exact_enumeration",
+        "legal_list_count": 9,
+        "enumerated_lists": 9,
+        "estimated_ops": 27,
+        "monte_carlo_standard_error_max": 0.0,
+        "action_prob_error": "0（精确枚举）"
+      },
+      "timing_seconds": 2.4487992050126195e-05
+    }
+  ],
+  "computation_design": {
+    "paths": {
+      "deployment_display": "无需枚举：展示列表按分数与约束确定，π(a)=1/|列表|，精确",
+      "randomized_list_policy": "合法列表价值 softmax，再均匀抽取；π(a)=Σ_L w(L)/|L|"
+    },
+    "exact_enumeration_budget_lists": 50000,
+    "methods": {
+      "exact_enumeration": {
+        "requests": 6,
+        "enumerated_lists": 84,
+        "sampled_lists": 0,
+        "estimated_ops": 252,
+        "max_mc_stderr": 0.0
+      }
+    },
+    "wall_clock_seconds": 0.000177,
+    "monte_carlo_demonstration": {
+      "note": "把精确枚举预算压到 1 后强制抽样；标准误约为 1/sqrt(样本数) 量级。",
+      "examples": [
+        {
+          "request_id": "r14",
+          "method": "monte_carlo",
+          "legal_list_count": 19,
+          "sampled_lists": 2000,
+          "acceptance_rate": 0.9519276534983341,
+          "action_probs": {
+            "a": 0.022794844947181578,
+            "b": 0.25426292921504295,
+            "c": 0.2287437991354994,
+            "d": 0.024863953872369525,
+            "e": 0.25698484029562196,
+            "f": 0.21234963253428463
+          },
+          "monte_carlo_standard_error_by_action": {
+            "a": 0.0007462695999188662,
+            "b": 0.008219156150147875,
+            "c": 0.007401978527035831,
+            "d": 0.0007626117208865368,
+            "e": 0.007878378654894404,
+            "f": 0.006603762304493011
+          },
+          "action_prob_error": "抽样误差：见各动作蒙特卡洛标准误；固定种子可复现"
+        },
+        {
+          "request_id": "r15",
+          "method": "monte_carlo",
+          "legal_list_count": 19,
+          "sampled_lists": 2000,
+          "acceptance_rate": 0.9376465072667605,
+          "action_probs": {
+            "a": 0.02264593039987315,
+            "b": 0.25641654017805926,
+            "c": 0.2184735382485317,
+            "d": 0.027423580070837165,
+            "e": 0.2537951000308388,
+            "f": 0.22124531107185988
+          },
+          "monte_carlo_standard_error_by_action": {
+            "a": 0.0007409973795270689,
+            "b": 0.008258624077313472,
+            "c": 0.007103191191333614,
+            "d": 0.000824233505101501,
+            "e": 0.008005719770765682,
+            "f": 0.006827781719469793
+          },
+          "action_prob_error": "抽样误差：见各动作蒙特卡洛标准误；固定种子可复现"
+        }
+      ]
+    },
+    "budget_statement": "枚举成本 ≈ 合法列表数 × 列表长度；抽样成本 ≈ 样本数 / 接受率 × 列表长度。合法列表数由按业态分组的 DP 先算出，超过预算才转为拒绝采样。"
+  },
+  "claims": [
+    "日志是观察性的；所有 OPE 数值都依赖记录策略与目标概率的给定假设，不是线上因果收益的证明。",
+    "目标动作概率同时包含重排列表概率与最终均匀抽取，不能使用重排前分数。",
+    "支持损失存在时只报告已识别部分，拒绝称完整策略收益。",
+    "裁剪后的 IPS 是有偏估计量，与未裁剪结果分列，不标注为无偏。",
+    "冷启动项目使用中性先验，不使用未来点击或热门度回填。"
+  ]
+}
